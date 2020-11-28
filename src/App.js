@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react'
 import './App.css';
+import NavBar from './components/NavBar';
+import CountriesList from './components/CountriesList';
+import CountryDetails from './components/CountryDetails';
+import {Switch, Route} from './react-router-dom'
 
-function App() {
-  return (
+class App extends Component  {
+
+  state = {
+    singleCountry: []
+
+  }
+  render(){
+  return ( 
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <NavBar />
+     <div class="container">
+     <div class= "row">
+     <CountriesList />
+     <Switch>
+       <Route exact path = "/:countrycode" component={()=> <CountryDetails infoCountry={this.state.singleCountry}/>}/>
+     </Switch>
+      </div>
+     </div>
+     </div>  
   );
 }
-
+}
 export default App;
